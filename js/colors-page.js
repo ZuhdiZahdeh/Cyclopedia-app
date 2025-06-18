@@ -1,4 +1,4 @@
-// colors.js
+// colors-page.js
 import { db } from "./firebase.js";
 import { collection, getDocs } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 import { playAudio } from "./audio-handler.js";
