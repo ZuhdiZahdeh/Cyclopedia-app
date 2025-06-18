@@ -1,0 +1,13 @@
+/* colors-page.css (page-specific) */
+#content-display {
+  text-align: center;
+  padding: 2rem;
+  background-color: #fffde7;
+}
+#itemImage {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  border: 3px solid var(--text-color);
+  margin-bottom: 1rem;
+}
