@@ -1,0 +1,8 @@
+/* colors.css */
+:root {
+  --primary-color: #4CAF50;
+  --secondary-color: #FF9800;
+  --accent-color: #2196F3;
+  --text-color: #333;
+  --bg-color: #f9f9f9;
+}
