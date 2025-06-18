@@ -1,0 +1,6 @@
+/* fonts.css */
+:root {
+  --font-ar-body: 'Cairo', sans-serif;
+  --font-en-body: 'Poppins', sans-serif;
+  --font-he-body: 'Assistant', sans-serif;
+}
