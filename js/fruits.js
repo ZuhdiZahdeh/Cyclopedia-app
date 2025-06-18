@@ -23,3 +23,13 @@ async function loadFruits() {
     });
   });
 }
+
+
+function displayItem(item) {
+  document.getElementById("itemImage").src = `images/${category}/${item.image}`;
+  document.getElementById("itemName").textContent = item.name[lang];
+  playAudio(`audio/${lang}/${category}/${item.voices.teacher}`);
+}
+
+loadFruits();
+
