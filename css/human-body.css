@@ -1,0 +1,12 @@
+/* human-body.css */
+#content-display {
+  text-align: center;
+  padding: 2rem;
+  background-color: #ede7f6;
+}
+#itemImage {
+  width: 220px;
+  height: auto;
+  border-radius: 10px;
+  border: 2px solid #7e57c2;
+}
