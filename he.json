@@ -1,0 +1,14 @@
+// he.json
+{
+  "fruits_title": "פירות",
+  "animals_title": "חיות",
+  "vegetables_title": "ירקות",
+  "transport_title": "תחבורה",
+  "birds_title": "ציפורים",
+  "plants_title": "צמחים",
+  "human_body_title": "גוף האדם",
+  "fish_title": "דגים",
+  "colors_title": "צבעים",
+  "numbers_title": "מספרים",
+  "time_title": "זמן"
+}
