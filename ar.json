@@ -1,0 +1,14 @@
+// ar.json
+{
+  "fruits_title": "الفواكه",
+  "animals_title": "الحيوانات",
+  "vegetables_title": "الخضروات",
+  "transport_title": "وسائل النقل",
+  "birds_title": "الطيور",
+  "plants_title": "النباتات",
+  "human_body_title": "جسم الإنسان",
+  "fish_title": "الأسماك",
+  "colors_title": "الألوان",
+  "numbers_title": "الأرقام",
+  "time_title": "الوقت"
+}
