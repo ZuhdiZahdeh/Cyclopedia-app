@@ -1,0 +1,14 @@
+// en.json
+{
+  "fruits_title": "Fruits",
+  "animals_title": "Animals",
+  "vegetables_title": "Vegetables",
+  "transport_title": "Transport",
+  "birds_title": "Birds",
+  "plants_title": "Plants",
+  "human_body_title": "Human Body",
+  "fish_title": "Fish",
+  "colors_title": "Colors",
+  "numbers_title": "Numbers",
+  "time_title": "Time"
+}
