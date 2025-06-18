@@ -1,0 +1,12 @@
+/* plants.css */
+#content-display {
+  text-align: center;
+  padding: 2rem;
+  background-color: #f1f8e9;
+}
+#itemImage {
+  width: 200px;
+  height: auto;
+  border: 2px dotted green;
+  border-radius: 6px;
+}
