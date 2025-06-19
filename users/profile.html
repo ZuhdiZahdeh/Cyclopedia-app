@@ -1,0 +1,32 @@
+<!-- users/profile.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Profile | KidCyclopedia</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <script defer src="../js/profile.js"></script>
+</head>
+<body>
+  <main class="form-container">
+    <h2>👤 Edit Profile</h2>
+    <form id="profileForm">
+      <label for="name">📛 Name:</label>
+      <input type="text" id="name" required />
+
+      <label for="language">🌐 Language:</label>
+      <select id="language">
+        <option value="ar">العربية</option>
+        <option value="en">English</option>
+        <option value="he">עברית</option>
+      </select>
+
+      <label>🧸 Avatar:</label>
+		<div class="avatar-options" id="avatarContainer"></div>
+
+
+      <button type="submit">💾 Save</button>
+    </form>
+  </main>
+</body>
+</html>

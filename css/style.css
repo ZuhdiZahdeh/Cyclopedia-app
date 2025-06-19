@@ -1,4 +1,4 @@
-/* style.css */
+/* css/style.css */
 body {
   font-family: var(--font-en-body);
   background-color: var(--bg-color);
@@ -31,4 +31,32 @@ header, footer {
   text-decoration: none;
   color: white;
   font-weight: bold;
+}
+.form-container {
+  max-width: 400px;
+  margin: 2rem auto;
+  padding: 1rem;
+  border: 2px solid var(--primary-color);
+  border-radius: 12px;
+  background-color: white;
+  text-align: left;
+}
+
+.form-container label {
+  display: block;
+  margin-top: 1rem;
+}
+
+.form-container input,
+.form-container select,
+.form-container button {
+  width: 100%;
+  padding: 0.5rem;
+  margin-top: 0.3rem;
+}
+
+.avatar-options {
+  display: flex;
+  gap: 1rem;
+  margin-top: 0.5rem;
 }

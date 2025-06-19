@@ -1,0 +1,34 @@
+{
+  "avatars": [
+    {
+      "id": "boy1",
+      "label": "👦 Boy 1",
+      "filename": "boy1.png"
+    },
+    {
+      "id": "girl1",
+      "label": "👧 Girl 1",
+      "filename": "girl1.png"
+    },
+    {
+      "id": "boy2",
+      "label": "👦 Boy 2",
+      "filename": "boy2.png"
+    },
+    {
+      "id": "girl2",
+      "label": "👧 Girl 2",
+      "filename": "girl2.png"
+    },
+    {
+      "id": "robot",
+      "label": "🤖 Robot",
+      "filename": "robot.png"
+    },
+    {
+      "id": "cat",
+      "label": "🐱 Cat",
+      "filename": "cat.png"
+    }
+  ]
+}
