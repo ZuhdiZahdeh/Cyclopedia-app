@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Welcome | KidCyclopedia</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <script type="module">
+    import { auth, db } from './firebase-config.js';
+    import { onAuthStateChanged } from 'firebase/auth';
+    import { doc, getDoc } from 'firebase/firestore';
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const lang = localStorage.getItem("language") || "en";
+      document.documentElement.lang = lang;
+      document.body.dir = (lang === "ar" || lang === "he") ? "rtl" : "ltr";
+
+      const content = document.getElementById("welcomeMessage");
+
+      onAuthStateChanged(auth, async (user) => {
+        if (user) {
+          const userDoc = await getDoc(doc(db, "users", user.uid));
+          if (userDoc.exists()) {
+            const data = userDoc.data();
+            const name = data.username || "User";
+            const level = data.level || "Beginner";
+
+            if (lang === "ar") {
+              content.innerHTML = `
+                <h2>👋 أهلاً بك ${name}</h2>
+                <p>🎓 مستواك الحالي: ${level}</p>
+                <p>🌟 استعد لمغامرة تعليمية رائعة!</p>
+              `;
+            } else {
+              content.innerHTML = `
+                <h2>👋 Welcome ${name}</h2>
+                <p>🎓 Your current level: ${level}</p>
+                <p>🌟 Get ready for an exciting learning journey!</p>
+              `;
+            }
+          }
+        } else {
+          window.location.href = "login.html";
+        }
+      });
+    });
+  </script>
+</head>
+<body>
+  <main class="form-container">
+    <div id="welcomeMessage">Loading...</div>
+  </main>
+</body>
+</html>

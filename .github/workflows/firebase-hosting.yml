@@ -5,3 +5,4 @@ hosting:
     - firebase.json
     - .firebase
     - **/.*  # تجاهل الملفات المخفية
+    

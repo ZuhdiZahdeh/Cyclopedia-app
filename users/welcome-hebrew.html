@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="he">
+<head>
+  <meta charset="UTF-8" />
+  <title>ברוך הבא | האנציקלופדיה של הילדים</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <script type="module">
+    import { auth, db } from './firebase-config.js';
+    import { onAuthStateChanged } from 'firebase/auth';
+    import { doc, getDoc } from 'firebase/firestore';
+
+    const messages = {
+      en: {
+        Beginner: {
+          greet: "👋 Welcome to your first adventure!",
+          msg: "You're starting as a Beginner. Ready to explore?"
+        },
+        Intermediate: {
+          greet: "👋 Welcome back, Explorer!",
+          msg: "You're progressing well! Keep going!"
+        },
+        Advanced: {
+          greet: "👋 Welcome, Master!",
+          msg: "You're reaching the top. Challenge yourself even more!"
+        }
+      },
+      ar: {
+        Beginner: {
+          greet: "👋 مرحبًا بك في مغامرتك الأولى!",
+          msg: "أنت تبدأ كمبتدئ. مستعد للاستكشاف؟"
+        },
+        Intermediate: {
+          greet: "👋 مرحبًا بك أيها المستكشف!",
+          msg: "تتقدم بشكل رائع! تابع المسير!"
+        },
+        Advanced: {
+          greet: "👋 مرحبًا بك أيها الخبير!",
+          msg: "لقد اقتربت من القمة. تحدى نفسك أكثر!"
+        }
+      },
+      he: {
+        Beginner: {
+          greet: "👋 ברוך הבא להרפתקה הראשונה שלך!",
+          msg: "אתה מתחיל כרמת מתחיל. מוכן לגלות?"
+        },
+        Intermediate: {
+          greet: "👋 ברוך שובך, חוקר!",
+          msg: "אתה מתקדם יפה! המשך כך!"
+        },
+        Advanced: {
+          greet: "👋 ברוך הבא, מאסטר!",
+          msg: "אתה כמעט בפסגה. אתגר את עצמך עוד יותר!"
+        }
+      }
+    };
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const lang = localStorage.getItem("language") || "en";
+      document.documentElement.lang = lang;
+      document.body.dir = (lang === "ar" || lang === "he") ? "rtl" : "ltr";
+
+      const container = document.getElementById("welcomeArea");
+
+      onAuthStateChanged(auth, async (user) => {
+        if (user) {
+          const userDoc = await getDoc(doc(db, "users", user.uid));
+          if (userDoc.exists()) {
+            const data = userDoc.data();
+            const level = data.level || "Beginner";
+            const name = data.username || "User";
+            const langMsgs = messages[lang] || messages.en;
+            const content = langMsgs[level] || langMsgs["Beginner"];
+
+            container.innerHTML = `
+              <h2>${content.greet}</h2>
+              <p><strong>${lang === "he" ? "שם:" : lang === "ar" ? "الاسم:" : "Name:"}</strong> ${name}</p>
+              <p><strong>${lang === "he" ? "רמה:" : lang === "ar" ? "المستوى:" : "Level:"}</strong> ${level}</p>
+              <p>${content.msg}</p>
+            `;
+          }
+        } else {
+          window.location.href = "login.html";
+        }
+      });
+    });
+  </script>
+</head>
+<body>
+  <main class="form-container">
+    <div id="welcomeArea">...</div>
+  </main>
+</body>
+</html>
