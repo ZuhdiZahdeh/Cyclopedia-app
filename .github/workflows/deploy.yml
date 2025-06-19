@@ -3,11 +3,16 @@ name: Deploy to Firebase Hosting
 on:
   push:
     branches:
+<<<<<<< HEAD
       - main  # غيّره إلى master إذا كان فرعك الرئيسي اسمه master
+=======
+      - main  # أو master حسب اسم الفرع
+>>>>>>> 4caffb1df33fdf1e733d6016727b7063d82452ce
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
+<<<<<<< HEAD
 
     steps:
       - name: 🔄 Checkout code
@@ -15,8 +20,17 @@ jobs:
 
       - name: 🚀 Deploy to Firebase Hosting
         uses: FirebaseExtended/action-hosting-deploy@v0
+=======
+    steps:
+      - uses: actions/checkout@v4
+      - uses: FirebaseExtended/action-hosting-deploy@v0
+>>>>>>> 4caffb1df33fdf1e733d6016727b7063d82452ce
         with:
           repoToken: "${{ secrets.GITHUB_TOKEN }}"
           firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT }}"
           channelId: live
+<<<<<<< HEAD
           projectId: cyclopedia-edu  # ← غيّرها إذا كان لديك ID مختلف للمشروع
+=======
+          projectId: cyclopedia-edu
+>>>>>>> 4caffb1df33fdf1e733d6016727b7063d82452ce
