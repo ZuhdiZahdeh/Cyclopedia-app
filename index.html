@@ -10,10 +10,18 @@
   <script src="js/main.js" defer></script>
 </head>
 <body>
-  <header>
-    <h1>Welcome to KidCyclopedia</h1>
-    <div id="language-selector"></div>
-  </header>
+ <header>
+  <h1>Welcome to KidCyclopedia</h1>
+  <div id="language-selector"></div>
+
+  <!-- auth buttons -->
+  <div id="auth-buttons">
+    <a id="loginBtn" href="users/login.html">🔑 Login</a>
+    <a id="registerBtn" href="users/register.html">📝 Register</a>
+    <button id="logoutBtn" style="display:none;">🚪 Logout</button>
+  </div>
+</header>
+
 
   <main class="category-grid">
     <a href="fruits.html" class="category-card">🍎 Fruits</a>
