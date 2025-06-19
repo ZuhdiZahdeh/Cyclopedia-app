@@ -1,32 +1,72 @@
-<!-- users/profile.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <title>Profile | KidCyclopedia</title>
   <link rel="stylesheet" href="../css/style.css">
-  <script defer src="../js/profile.js"></script>
+  <script defer type="module" src="../js/profile.js"></script>
+  <script>
+    const lang = localStorage.getItem('language') || 'en';
+    document.documentElement.lang = lang;
+    document.body && (document.body.dir = (lang === 'ar' || lang === 'he') ? 'rtl' : 'ltr');
+  </script>
 </head>
 <body>
   <main class="form-container">
-    <h2>👤 Edit Profile</h2>
+    <h2 data-en="👤 Edit Profile" data-ar="👤 تعديل الملف الشخصي" data-he="👤 ערוך פרופיל">👤 Edit Profile</h2>
     <form id="profileForm">
-      <label for="name">📛 Name:</label>
-      <input type="text" id="name" required />
+      <label>
+        <span data-en="Full Name:" data-ar="الاسم الكامل:" data-he="שם מלא:">Full Name:</span>
+        <input type="text" id="name" required />
+      </label>
 
-      <label for="language">🌐 Language:</label>
-      <select id="language">
-        <option value="ar">العربية</option>
-        <option value="en">English</option>
-        <option value="he">עברית</option>
-      </select>
+      <label>
+        <span data-en="Email:" data-ar="البريد الإلكتروني:" data-he="אימייל:">Email:</span>
+        <input type="email" id="email" disabled />
+      </label>
 
-      <label>🧸 Avatar:</label>
-		<div class="avatar-options" id="avatarContainer"></div>
+      <label>
+        <span data-en="Birthdate:" data-ar="تاريخ الميلاد:" data-he="תאריך לידה:">Birthdate:</span>
+        <input type="date" id="birthdate" />
+      </label>
 
+      <label>
+        <span data-en="Level:" data-ar="المستوى:" data-he="רמה:">Level:</span>
+        <select id="level">
+          <option value="Beginner">Beginner</option>
+          <option value="Intermediate">Intermediate</option>
+          <option value="Advanced">Advanced</option>
+        </select>
+      </label>
 
-      <button type="submit">💾 Save</button>
+      <label>
+        <span data-en="Language:" data-ar="اللغة:" data-he="שפה:">Language:</span>
+        <select id="language">
+          <option value="ar">العربية</option>
+          <option value="en">English</option>
+          <option value="he">עברית</option>
+        </select>
+      </label>
+
+      <label>
+        <span data-en="Student Number:" data-ar="رقم الطالب:" data-he="מספר תלמיד:">Student Number:</span>
+        <input type="text" id="studentNO" maxlength="12" />
+      </label>
+
+      <label>
+        <span data-en="Avatar URL:" data-ar="رابط الصورة الرمزية:" data-he="כתובת תמונת אוואטר:">Avatar URL:</span>
+        <input type="text" id="avatar" />
+      </label>
+
+      <button type="submit" data-en="Save" data-ar="حفظ" data-he="שמור">💾 Save</button>
     </form>
   </main>
+
+  <script>
+    const lang = localStorage.getItem("language") || "en";
+    document.querySelectorAll("[data-ar]").forEach(el => {
+      el.innerText = el.dataset[lang] || el.innerText;
+    });
+  </script>
 </body>
 </html>

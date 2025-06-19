@@ -1,44 +1,44 @@
-// js/register.js
-document.addEventListener("DOMContentLoaded", () => {
-  loadAvatars();
+import { auth, db } from './firebase-config.js';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { doc, setDoc, serverTimestamp } from 'firebase/firestore';
 
-  document.getElementById("registerForm").addEventListener("submit", function (e) {
+document.addEventListener("DOMContentLoaded", () => {
+  const form = document.getElementById("registerForm");
+
+  form.addEventListener("submit", async function (e) {
     e.preventDefault();
 
-    const fullname = document.getElementById("fullname").value;
+    const username = document.getElementById("fullname").value;
+    const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
     const language = document.getElementById("language").value;
-    const avatar = document.querySelector('input[name="avatar"]:checked').value;
+    const avatar = document.querySelector('input[name="avatar"]:checked')?.value || "";
+    const birthdate = document.getElementById("birthdate")?.value || "";
+    const level = document.getElementById("level")?.value || "Beginner";
+    const studentNO = document.getElementById("studentNO")?.value || "";
 
-    const user = {
-      uid: Date.now().toString(),
-      name: fullname,
-      password,
-      language,
-      avatar,
-      points: 0,
-      level: "Beginner"
-    };
+    try {
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      const uid = userCredential.user.uid;
 
-    localStorage.setItem("user", JSON.stringify(user));
-    localStorage.setItem("language", language);
+      await setDoc(doc(db, "users", uid), {
+        uid,
+        username,
+        email,
+        birthdate,
+        level,
+        avatar,
+        studentNO,
+        language,
+        points: 0,
+        createdAt: serverTimestamp()
+      });
 
-    window.location.href = "../index.html";
+      alert("🎉 تم التسجيل بنجاح!");
+      window.location.href = "../users/welcome-redirect.html";
+    } catch (error) {
+      console.error("❌ خطأ أثناء التسجيل:", error);
+      alert("حدث خطأ أثناء التسجيل: " + error.message);
+    }
   });
 });
-
-function loadAvatars() {
-  fetch('../data/avatars.json')
-    .then(response => response.json())
-    .then(data => {
-      const container = document.getElementById("avatarContainer");
-      data.avatars.forEach(avatar => {
-        const label = document.createElement("label");
-        label.innerHTML = `
-          <input type="radio" name="avatar" value="${avatar.filename}" />
-          <img src="../images/avatars/${avatar.filename}" alt="${avatar.label}" width="40" />
-        `;
-        container.appendChild(label);
-      });
-    });
-}

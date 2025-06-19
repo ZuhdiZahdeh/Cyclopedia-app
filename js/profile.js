@@ -1,43 +1,43 @@
-// js/profile.js
+import { auth, db } from './firebase-config.js';
+import { onAuthStateChanged } from 'firebase/auth';
+import { doc, getDoc, updateDoc } from 'firebase/firestore';
+
 document.addEventListener("DOMContentLoaded", () => {
-  const user = JSON.parse(localStorage.getItem("user"));
-  if (!user) return location.href = "login.html";
+  const form = document.getElementById("profileForm");
 
-  document.getElementById("name").value = user.name;
-  document.getElementById("language").value = user.language;
+  onAuthStateChanged(auth, async (user) => {
+    if (!user) return window.location.href = "login.html";
 
-  loadAvatars(user.avatar);
+    const uid = user.uid;
+    const userDocRef = doc(db, "users", uid);
+    const userDoc = await getDoc(userDocRef);
 
-  document.getElementById("profileForm").addEventListener("submit", function (e) {
-    e.preventDefault();
+    if (userDoc.exists()) {
+      const data = userDoc.data();
+      document.getElementById("name").value = data.username || "";
+      document.getElementById("email").value = data.email || "";
+      document.getElementById("birthdate").value = data.birthdate || "";
+      document.getElementById("level").value = data.level || "Beginner";
+      document.getElementById("language").value = data.language || "en";
+      document.getElementById("studentNO").value = data.studentNO || "";
+      document.getElementById("avatar").value = data.avatar || "";
+    }
 
-    user.name = document.getElementById("name").value;
-    user.language = document.getElementById("language").value;
-    user.avatar = document.querySelector('input[name="avatar"]:checked').value;
+    form.addEventListener("submit", async function (e) {
+      e.preventDefault();
 
-    localStorage.setItem("user", JSON.stringify(user));
-    localStorage.setItem("language", user.language);
-
-    alert("✅ Profile updated!");
-    location.href = "../index.html";
-  });
-});
-
-function loadAvatars(selectedAvatar) {
-  fetch('../data/avatars.json')
-    .then(response => response.json())
-    .then(data => {
-      const container = document.getElementById("avatarContainer");
-      data.avatars.forEach(avatar => {
-        const label = document.createElement("label");
-        label.innerHTML = `
-          <input type="radio" name="avatar" value="${avatar.filename}" />
-          <img src="../images/avatars/${avatar.filename}" alt="${avatar.label}" width="40" />
-        `;
-        container.appendChild(label);
+      await updateDoc(userDocRef, {
+        username: document.getElementById("name").value,
+        language: document.getElementById("language").value,
+        level: document.getElementById("level").value,
+        avatar: document.getElementById("avatar").value,
+        birthdate: document.getElementById("birthdate").value,
+        studentNO: document.getElementById("studentNO").value
       });
 
-      const selected = document.querySelector(`input[name="avatar"][value="${selectedAvatar}"]`);
-      if (selected) selected.checked = true;
+      localStorage.setItem("language", document.getElementById("language").value);
+      alert("✅ تم حفظ التعديلات");
+      window.location.href = "../index.html";
     });
-}
+  });
+});
