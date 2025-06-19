@@ -1,0 +1,7 @@
+hosting:
+  public: .
+  ignore:
+    - node_modules
+    - firebase.json
+    - .firebase
+    - **/.*  # تجاهل الملفات المخفية
